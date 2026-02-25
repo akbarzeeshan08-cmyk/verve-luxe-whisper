@@ -35,7 +35,7 @@ const OurStory = () => {
           <h2 className="font-serif text-3xl md:text-4xl text-foreground leading-tight mb-10 text-center">
             The Question That Started It All
           </h2>
-          <div className="space-y-6 font-sans text-muted-foreground text-lg leading-relaxed">
+          <div className="space-y-6 font-sans text-muted-foreground text-lg leading-relaxed text-justify">
             <p>
               It began with a simple observation — one that changed everything.
             </p>
@@ -93,7 +93,7 @@ const OurStory = () => {
           <h2 className="font-serif text-3xl md:text-4xl text-foreground leading-tight mb-10 text-center">
             Heritage Meets Devotion
           </h2>
-          <div className="space-y-6 font-sans text-muted-foreground text-lg leading-relaxed">
+          <div className="space-y-6 font-sans text-muted-foreground text-lg leading-relaxed text-justify">
             <p>
               Every Verve piece begins its life in our atelier, where master leather artisans
               hand-select the finest full-grain hides sourced from the most reputable tanneries.

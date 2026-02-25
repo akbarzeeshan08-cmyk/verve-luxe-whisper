@@ -1,6 +1,6 @@
 const Footer = () => {
   return (
-    <footer className="bg-primary text-primary-foreground py-16 lg:py-20">
+    <footer className="bg-primary text-primary-foreground py-16 lg:py-[40px]">
       <div className="container mx-auto px-6 lg:px-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           {/* Brand */}
@@ -13,38 +13,33 @@ const Footer = () => {
 
           {/* Shop */}
           <div>
-            <h4 className="font-sans text-xs tracking-[0.25em] uppercase mb-6 text-primary-foreground/40">
+            <h4 className="font-sans text-xs tracking-[0.25em] uppercase mb-6 text-primary-foreground/40 font-semibold">
               Shop
             </h4>
             <ul className="space-y-3">
-              {["Collars", "Leashes", "Dog Coats", "New Arrivals"].map((item) => (
-                <li key={item}>
+              {["Collars", "Leashes", "Dog Coats", "New Arrivals"].map((item) =>
+              <li key={item}>
                   <a href="#" className="font-sans text-sm text-primary-foreground/70 hover:text-accent transition-colors duration-300">
                     {item}
                   </a>
                 </li>
-              ))}
+              )}
             </ul>
           </div>
 
           {/* About */}
           <div>
-            <h4 className="font-sans text-xs tracking-[0.25em] uppercase mb-6 text-primary-foreground/40">
+            <h4 className="font-sans text-xs tracking-[0.25em] uppercase mb-6 text-primary-foreground/40 font-semibold">
               About
             </h4>
             <ul className="space-y-3">
-              <li>
-                <a href="/our-story" className="font-sans text-sm text-primary-foreground/70 hover:text-accent transition-colors duration-300">
-                  Our Story
-                </a>
-              </li>
-              {["Craftsmanship", "Materials", "Journal"].map((item) => (
-                <li key={item}>
+              {["Our Story", "Craftsmanship", "Materials", "Journal"].map((item) =>
+              <li key={item}>
                   <a href="#" className="font-sans text-sm text-primary-foreground/70 hover:text-accent transition-colors duration-300">
                     {item}
                   </a>
                 </li>
-              ))}
+              )}
             </ul>
           </div>
 
@@ -54,13 +49,13 @@ const Footer = () => {
               Support
             </h4>
             <ul className="space-y-3">
-              {["Contact", "Shipping", "Returns", "Size Guide"].map((item) => (
-                <li key={item}>
+              {["Contact", "Shipping", "Returns", "Size Guide"].map((item) =>
+              <li key={item} className="font-semibold">
                   <a href="#" className="font-sans text-sm text-primary-foreground/70 hover:text-accent transition-colors duration-300">
                     {item}
                   </a>
                 </li>
-              ))}
+              )}
             </ul>
           </div>
         </div>
@@ -71,16 +66,16 @@ const Footer = () => {
             © 2026 Verve. All rights reserved.
           </p>
           <div className="flex gap-6">
-            {["Privacy", "Terms", "Cookies"].map((item) => (
-              <a key={item} href="#" className="font-sans text-xs text-primary-foreground/40 hover:text-primary-foreground/70 transition-colors">
+            {["Privacy", "Terms", "Cookies"].map((item) =>
+            <a key={item} href="#" className="font-sans text-xs text-primary-foreground/40 hover:text-primary-foreground/70 transition-colors">
                 {item}
               </a>
-            ))}
+            )}
           </div>
         </div>
       </div>
-    </footer>
-  );
+    </footer>);
+
 };
 
 export default Footer;

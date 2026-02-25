@@ -28,7 +28,7 @@ const collections = [
 
 const FeaturedCollections = () => {
   return (
-    <section id="collections" className="py-24 bg-background lg:py-[50px]">
+    <section id="collections" className="py-24 bg-background lg:py-[35px]">
       <div className="container mx-auto px-6 lg:px-12">
         {/* Section header */}
         <div className="text-center mb-16 lg:mb-20">

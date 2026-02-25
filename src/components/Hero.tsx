@@ -49,7 +49,7 @@ const Hero = () => {
             </a>
             <a
 
-              className="inline-block border border-cream/40 text-cream font-sans text-sm tracking-widest uppercase px-8 py-4 hover:bg-cream/10 transition-colors duration-300" href="#our-story">
+              className="inline-block border border-cream/40 text-cream font-sans text-sm tracking-widest uppercase px-8 py-4 hover:bg-cream/10 transition-colors duration-300" href="/our-story">
 
               Our Story
             </a>

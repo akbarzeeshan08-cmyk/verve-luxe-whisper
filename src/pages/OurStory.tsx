@@ -39,7 +39,7 @@ const OurStory = () => {
             <p>
               It began with a simple observation — one that changed everything.
             </p>
-            <p className="font-bold">
+            <p>
               We live in a world where we choose the finest things for ourselves. We wear
               watches that tell more than time. We carry bags that speak before we do. We
               pick the phone in our pocket with the same care we pick a suit. And yet, when

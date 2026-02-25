@@ -3,32 +3,32 @@ import leashesImg from "@/assets/collection-leashes.jpg";
 import coatsImg from "@/assets/collection-coats.jpg";
 
 const collections = [
-  {
-    title: "Collars",
-    subtitle: "Premium Leather",
-    description: "Hand-stitched from the finest full-grain leather with solid brass hardware.",
-    image: collarsImg,
-    alt: "Premium leather dog collar with brass buckle on marble surface",
-  },
-  {
-    title: "Leashes",
-    subtitle: "Braided Leather",
-    description: "Durable, elegant leashes designed for comfort and lasting beauty.",
-    image: leashesImg,
-    alt: "Braided leather dog leash with gold clip on marble surface",
-  },
-  {
-    title: "Dog Coats",
-    subtitle: "Tailored Outerwear",
-    description: "Stylish, weather-ready coats with leather trim and artisan details.",
-    image: coatsImg,
-    alt: "Charcoal wool dog coat with leather collar and brass buttons",
-  },
-];
+{
+  title: "Collars",
+  subtitle: "Premium Leather",
+  description: "Hand-stitched from the finest full-grain leather with solid brass hardware.",
+  image: collarsImg,
+  alt: "Premium leather dog collar with brass buckle on marble surface"
+},
+{
+  title: "Leashes",
+  subtitle: "Braided Leather",
+  description: "Durable, elegant leashes designed for comfort and lasting beauty.",
+  image: leashesImg,
+  alt: "Braided leather dog leash with gold clip on marble surface"
+},
+{
+  title: "Dog Coats",
+  subtitle: "Tailored Outerwear",
+  description: "Stylish, weather-ready coats with leather trim and artisan details.",
+  image: coatsImg,
+  alt: "Charcoal wool dog coat with leather collar and brass buttons"
+}];
+
 
 const FeaturedCollections = () => {
   return (
-    <section id="collections" className="py-24 lg:py-32 bg-background">
+    <section id="collections" className="py-24 bg-background lg:py-[50px]">
       <div className="container mx-auto px-6 lg:px-12">
         {/* Section header */}
         <div className="text-center mb-16 lg:mb-20">
@@ -43,18 +43,18 @@ const FeaturedCollections = () => {
 
         {/* Collection cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
-          {collections.map((item) => (
-            <article
-              key={item.title}
-              className="group cursor-pointer"
-            >
+          {collections.map((item) =>
+          <article
+            key={item.title}
+            className="group cursor-pointer">
+
               <div className="relative overflow-hidden mb-6">
                 <img
-                  src={item.image}
-                  alt={item.alt}
-                  className="w-full aspect-square object-cover transition-transform duration-700 group-hover:scale-105"
-                  loading="lazy"
-                />
+                src={item.image}
+                alt={item.alt}
+                className="w-full aspect-square object-cover transition-transform duration-700 group-hover:scale-105"
+                loading="lazy" />
+
                 <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/10 transition-colors duration-500" />
               </div>
               <p className="text-xs font-sans tracking-[0.25em] uppercase text-accent mb-2">
@@ -73,11 +73,11 @@ const FeaturedCollections = () => {
                 </svg>
               </span>
             </article>
-          ))}
+          )}
         </div>
       </div>
-    </section>
-  );
+    </section>);
+
 };
 
 export default FeaturedCollections;

@@ -2,7 +2,7 @@ import brandStoryImg from "@/assets/brand-story.jpg";
 
 const BrandStory = () => {
   return (
-    <section id="story" className="py-24 lg:py-32 bg-muted">
+    <section id="story" className="py-24 bg-muted lg:py-[50px]">
       <div className="container mx-auto px-6 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Image */}
@@ -11,8 +11,8 @@ const BrandStory = () => {
               src={brandStoryImg}
               alt="Artisan craftsman working on a premium leather collar in a warm-lit workshop"
               className="w-full aspect-[4/5] object-cover"
-              loading="lazy"
-            />
+              loading="lazy" />
+
           </div>
 
           {/* Text */}
@@ -56,8 +56,8 @@ const BrandStory = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>);
+
 };
 
 export default BrandStory;

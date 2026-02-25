@@ -154,7 +154,7 @@ const OurStory = () => {
       </section>
 
       {/* CTA */}
-      <section className="py-24 lg:py-32 bg-primary text-center">
+      <section className="py-[30px] bg-primary text-center">
         <div className="container mx-auto px-6 max-w-2xl">
           <h2 className="font-serif text-3xl md:text-4xl text-primary-foreground leading-tight mb-6">
             Give Them What They Deserve

@@ -8,7 +8,7 @@ const Navbar = () => {
     { label: "Collars", href: "#collections" },
     { label: "Leashes", href: "#collections" },
     { label: "Dog Coats", href: "#collections" },
-    { label: "Our Story", href: "#story" },
+    { label: "Our Story", href: "/our-story" },
   ];
 
   return (

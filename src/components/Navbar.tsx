@@ -1,14 +1,15 @@
 import { useState } from "react";
-import { Menu, X, ShoppingBag } from "lucide-react";
+import { Menu, X } from "lucide-react";
+import { CartDrawer } from "@/components/CartDrawer";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navLinks = [
-    { label: "Collars", href: "#collections" },
-    { label: "Leashes", href: "#collections" },
-    { label: "Dog Coats", href: "#collections" },
+    { label: "Shop", href: "/shop" },
+    { label: "Collections", href: "#collections" },
     { label: "Our Story", href: "/our-story" },
+    { label: "Contact", href: "/contact" },
   ];
 
   return (
@@ -56,10 +57,8 @@ const Navbar = () => {
           ))}
         </ul>
 
-        {/* Cart icon */}
-        <button className="text-foreground hover:text-accent transition-colors" aria-label="Cart">
-          <ShoppingBag size={22} />
-        </button>
+        {/* Cart */}
+        <CartDrawer />
       </nav>
 
       {/* Mobile menu */}

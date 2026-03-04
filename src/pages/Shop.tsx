@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { ShopifyProduct, storefrontApiRequest, STOREFRONT_PRODUCTS_QUERY } from "@/lib/shopify";
 import { useCartStore } from "@/stores/cartStore";
 import { Loader2, ShoppingBag } from "lucide-react";
@@ -47,6 +48,19 @@ const Shop = () => {
       <Navbar />
       <section className="pt-32 pb-24 px-6 lg:px-12">
         <div className="container mx-auto">
+          <Breadcrumb className="mb-8">
+            <BreadcrumbList>
+              <BreadcrumbItem>
+                <BreadcrumbLink asChild>
+                  <Link to="/">Home</Link>
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbPage>Shop</BreadcrumbPage>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
           <div className="text-center mb-16">
             <p className="text-sm font-sans tracking-[0.3em] uppercase text-accent mb-4">Shop</p>
             <h1 className="font-serif text-4xl md:text-5xl text-foreground mb-4">Our Products</h1>

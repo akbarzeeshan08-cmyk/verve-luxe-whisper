@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import brandStoryImg from "@/assets/brand-story.jpg";
 import heroImage from "@/assets/hero-image.jpg";
 
@@ -8,6 +9,21 @@ const OurStory = () => {
   return (
     <main className="min-h-screen bg-background">
       <Navbar />
+      <div className="container mx-auto px-6 lg:px-12 pt-28 pb-4">
+        <Breadcrumb>
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink asChild>
+                <Link to="/">Home</Link>
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbPage>Our Story</BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
+      </div>
 
       {/* Hero */}
       <section className="relative h-[60vh] flex items-center justify-center overflow-hidden">

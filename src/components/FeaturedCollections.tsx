@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import collarsImg from "@/assets/collection-collars.jpg";
 import leashesImg from "@/assets/collection-leashes.jpg";
 import coatsImg from "@/assets/collection-coats.jpg";
@@ -8,21 +9,24 @@ const collections = [
   subtitle: "Premium Leather",
   description: "Hand-stitched from the finest full-grain leather with solid brass hardware.",
   image: collarsImg,
-  alt: "Premium leather dog collar with brass buckle on marble surface"
+  alt: "Premium leather dog collar with brass buckle on marble surface",
+  href: "/collections/collars",
 },
 {
   title: "Leashes",
   subtitle: "Braided Leather",
   description: "Durable, elegant leashes designed for comfort and lasting beauty.",
   image: leashesImg,
-  alt: "Braided leather dog leash with gold clip on marble surface"
+  alt: "Braided leather dog leash with gold clip on marble surface",
+  href: "/collections/leashes",
 },
 {
   title: "Dog Coats",
   subtitle: "Tailored Outerwear",
   description: "Stylish, weather-ready coats with leather trim and artisan details.",
   image: coatsImg,
-  alt: "Charcoal wool dog coat with leather collar and brass buttons"
+  alt: "Charcoal wool dog coat with leather collar and brass buttons",
+  href: "/collections/dog-coats",
 }];
 
 
@@ -44,9 +48,10 @@ const FeaturedCollections = () => {
         {/* Collection cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
           {collections.map((item) =>
-          <article
+          <Link
+            to={item.href}
             key={item.title}
-            className="group cursor-pointer">
+            className="group cursor-pointer block">
 
               <div className="relative overflow-hidden mb-6">
                 <img
@@ -72,7 +77,7 @@ const FeaturedCollections = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
               </span>
-            </article>
+            </Link>
           )}
         </div>
       </div>

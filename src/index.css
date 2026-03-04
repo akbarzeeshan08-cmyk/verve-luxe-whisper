@@ -6,8 +6,8 @@
 
 @layer base {
   :root {
-    /* Off-white background */
-    --background: 30 33% 97%;
+    /* White background */
+    --background: 0 0% 100%;
     --foreground: 160 30% 12%;
 
     /* Cards - pure white */

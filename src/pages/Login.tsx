@@ -16,39 +16,12 @@ const SHOPIFY_STORE_DOMAIN = "verve-luxe-whisper-0w3sy.myshopify.com";
 const Login = () => {
   const navigate = useNavigate();
   const { setAuth } = useAuthStore();
-  const [mode, setMode] = useState<"login" | "signup">("login");
   const [loading, setLoading] = useState(false);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    try {
-      const { accessToken, errors } = await loginCustomer(email, password);
-      if (errors.length > 0) {
-        toast.error(errors[0]);
-        return;
-      }
-      if (!accessToken) {
-        toast.error("Login failed. Please try again.");
-        return;
-      }
-      const customer = await getCustomer(accessToken);
-      if (customer) {
-        setAuth(accessToken, customer);
-        toast.success(`Welcome back, ${customer.firstName || customer.email}!`);
-        navigate("/");
-      }
-    } catch {
-      toast.error("Something went wrong. Please try again.");
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -64,11 +37,9 @@ const Login = () => {
         toast.error(createErrors[0]);
         return;
       }
-      // Auto-login after signup
       const { accessToken, errors: loginErrors } = await loginCustomer(email, password);
       if (loginErrors.length > 0 || !accessToken) {
         toast.success("Account created! Please sign in.");
-        setMode("login");
         return;
       }
       const customer = await getCustomer(accessToken);
@@ -85,7 +56,6 @@ const Login = () => {
   };
 
   const handleShopLogin = () => {
-    // Redirect to Shopify's hosted customer account login
     window.open(
       `https://shopify.com/authentication/${SHOPIFY_STORE_DOMAIN}/login`,
       "_blank"
@@ -99,23 +69,20 @@ const Login = () => {
         <div className="w-full max-w-md space-y-8">
           <div className="text-center">
             <h1 className="font-serif text-3xl tracking-wider text-foreground">
-              {mode === "login" ? "Sign In" : "Create Account"}
+              Create Account
             </h1>
             <p className="mt-2 text-sm text-muted-foreground">
-              {mode === "login"
-                ? "Welcome back to VERVE"
-                : "Join VERVE for a premium experience"}
+              Join VERVE for a premium experience
             </p>
           </div>
 
-          {/* Login with Shop button */}
           <Button
             type="button"
             onClick={handleShopLogin}
             className="w-full h-12 bg-[#5a31f4] hover:bg-[#4b27cc] text-white font-medium text-base rounded-lg flex items-center justify-center gap-2"
           >
             <ShoppingBag size={20} />
-            Log in with Shop
+            Sign up with Shop
           </Button>
 
           <div className="flex items-center gap-4">
@@ -124,29 +91,27 @@ const Login = () => {
             <Separator className="flex-1" />
           </div>
 
-          <form onSubmit={mode === "login" ? handleLogin : handleSignup} className="space-y-4">
-            {mode === "signup" && (
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="firstName">First Name</Label>
-                  <Input
-                    id="firstName"
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
-                    placeholder="John"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="lastName">Last Name</Label>
-                  <Input
-                    id="lastName"
-                    value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
-                    placeholder="Doe"
-                  />
-                </div>
+          <form onSubmit={handleSignup} className="space-y-4">
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="firstName">First Name</Label>
+                <Input
+                  id="firstName"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  placeholder="John"
+                />
               </div>
-            )}
+              <div className="space-y-2">
+                <Label htmlFor="lastName">Last Name</Label>
+                <Input
+                  id="lastName"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                  placeholder="Doe"
+                />
+              </div>
+            </div>
 
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
@@ -174,37 +139,9 @@ const Login = () => {
             </div>
 
             <Button type="submit" disabled={loading} className="w-full h-11">
-              {loading
-                ? "Please wait..."
-                : mode === "login"
-                ? "Sign In"
-                : "Create Account"}
+              {loading ? "Please wait..." : "Create Account"}
             </Button>
           </form>
-
-          <p className="text-center text-sm text-muted-foreground">
-            {mode === "login" ? (
-              <>
-                Don't have an account?{" "}
-                <button
-                  onClick={() => setMode("signup")}
-                  className="text-foreground underline underline-offset-4 hover:text-primary transition-colors"
-                >
-                  Create one
-                </button>
-              </>
-            ) : (
-              <>
-                Already have an account?{" "}
-                <button
-                  onClick={() => setMode("login")}
-                  className="text-foreground underline underline-offset-4 hover:text-primary transition-colors"
-                >
-                  Sign in
-                </button>
-              </>
-            )}
-          </p>
         </div>
       </main>
       <Footer />

@@ -142,6 +142,19 @@ const Login = () => {
               {loading ? "Please wait..." : "Create Account"}
             </Button>
           </form>
+
+          <p className="text-center text-sm text-muted-foreground">
+            Already have an account?{" "}
+            <button
+              onClick={() => {
+                navigate("/");
+                setTimeout(() => document.querySelector<HTMLButtonElement>('[aria-label="Sign in"]')?.click(), 300);
+              }}
+              className="text-foreground underline underline-offset-4 hover:text-primary transition-colors"
+            >
+              Sign in
+            </button>
+          </p>
         </div>
       </main>
       <Footer />

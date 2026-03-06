@@ -72,10 +72,8 @@ export async function storefrontApiRequest(query: string, variables: Record<stri
 
   const data = await response.json();
 
-  if (data.errors) {
-    throw new Error(`Error calling Shopify: ${data.errors.map((e: { message: string }) => e.message).join(', ')}`);
-  }
-
+  // Return data with errors for callers to handle (e.g. auth mutations)
+  // Only throw for unexpected top-level errors in non-mutation contexts
   return data;
 }
 

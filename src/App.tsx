@@ -10,6 +10,8 @@ import Shop from "./pages/Shop";
 import ProductDetail from "./pages/ProductDetail";
 import CategoryPage from "./pages/CategoryPage";
 import Login from "./pages/Login";
+import Privacy from "./pages/Privacy";
+import Terms from "./pages/Terms";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();

@@ -9,7 +9,7 @@ const Terms = () => {
         <h1 className="font-serif text-4xl lg:text-5xl tracking-wider text-foreground mb-4">Terms of Service</h1>
         <p className="text-sm text-muted-foreground mb-12">Last updated: March 10, 2026</p>
 
-        <div className="prose prose-neutral max-w-3xl space-y-8 text-foreground/80 font-sans text-sm leading-relaxed">
+        <div className="prose prose-neutral max-w-3xl space-y-8 text-foreground/80 font-sans text-sm leading-relaxed text-justify">
           <section>
             <h2 className="font-serif text-xl tracking-wider text-foreground mb-3">1. Agreement to Terms</h2>
             <p>By accessing or using the Verve website and purchasing our products, you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our website.</p>

@@ -66,14 +66,22 @@ export async function storefrontApiRequest(query: string, variables: Record<stri
     return;
   }
 
-  if (!response.ok) {
+  // Try to parse JSON even on error responses (Shopify often includes error details)
+  let data;
+  try {
+    data = await response.json();
+  } catch {
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    throw new Error('Failed to parse response');
+  }
+
+  if (!response.ok && !data?.errors) {
     throw new Error(`HTTP error! status: ${response.status}`);
   }
 
-  const data = await response.json();
-
   // Return data with errors for callers to handle (e.g. auth mutations)
-  // Only throw for unexpected top-level errors in non-mutation contexts
   return data;
 }
 

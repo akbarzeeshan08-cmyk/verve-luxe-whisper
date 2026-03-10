@@ -82,7 +82,7 @@ const Navbar = () => {
 
   const handleShopLogin = () => {
     window.open(
-      `https://shopify.com/authentication/${SHOPIFY_STORE_DOMAIN}/login`,
+      `https://${SHOPIFY_STORE_DOMAIN}/account/login`,
       "_blank"
     );
   };

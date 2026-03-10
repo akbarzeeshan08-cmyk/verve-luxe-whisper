@@ -66,11 +66,9 @@ const Footer = () => {
             © 2026 Verve. All rights reserved.
           </p>
           <div className="flex gap-6">
-            {["Privacy", "Terms", "Cookies"].map((item) =>
-            <a key={item} href="#" className="font-sans text-xs text-primary-foreground/40 hover:text-primary-foreground/70 transition-colors">
-                {item}
-              </a>
-            )}
+            <a href="/privacy" className="font-sans text-xs text-primary-foreground/40 hover:text-primary-foreground/70 transition-colors">Privacy</a>
+            <a href="/terms" className="font-sans text-xs text-primary-foreground/40 hover:text-primary-foreground/70 transition-colors">Terms</a>
+            <a href="#" className="font-sans text-xs text-primary-foreground/40 hover:text-primary-foreground/70 transition-colors">Cookies</a>
           </div>
         </div>
       </div>

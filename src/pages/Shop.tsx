@@ -4,10 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { ShopifyProduct, storefrontApiRequest, STOREFRONT_PRODUCTS_QUERY } from "@/lib/shopify";
-import { useCartStore } from "@/stores/cartStore";
 import { Loader2, ShoppingBag } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { toast } from "sonner";
 
 const Shop = () => {
   const [products, setProducts] = useState<ShopifyProduct[]>([]);

@@ -4,10 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { ShopifyProduct, storefrontApiRequest, STOREFRONT_PRODUCT_BY_HANDLE_QUERY } from "@/lib/shopify";
-import { useCartStore } from "@/stores/cartStore";
-import { Loader2, ArrowLeft, ShoppingBag } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { toast } from "sonner";
+import { Loader2, ShoppingBag } from "lucide-react";
 
 const ProductDetail = () => {
   const { handle } = useParams<{ handle: string }>();

@@ -152,20 +152,6 @@ const ProductDetail = () => {
                 )
               ))}
 
-              <Button
-                onClick={handleAddToCart}
-                disabled={isCartLoading || !selectedVariant?.availableForSale}
-                className="w-full bg-primary text-primary-foreground hover:bg-primary/90 tracking-widest uppercase text-xs py-6"
-                size="lg"
-              >
-                {isCartLoading ? (
-                  <Loader2 className="w-4 h-4 animate-spin" />
-                ) : !selectedVariant?.availableForSale ? (
-                  "Sold Out"
-                ) : (
-                  "Add to Cart"
-                )}
-              </Button>
             </div>
           </div>
         </div>

@@ -136,14 +136,6 @@ const CategoryPage = () => {
                         {price.currencyCode} {parseFloat(price.amount).toFixed(2)}
                       </p>
                     </Link>
-                    <Button
-                      onClick={() => handleAddToCart(product)}
-                      disabled={isCartLoading}
-                      variant="outline"
-                      className="mt-4 w-full border-foreground/20 hover:bg-foreground hover:text-background transition-colors duration-300 text-xs tracking-widest uppercase"
-                    >
-                      {isCartLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : "Add to Cart"}
-                    </Button>
                   </article>
                 );
               })}

@@ -28,20 +28,6 @@ const ProductDetail = () => {
     if (handle) fetchProduct();
   }, [handle]);
 
-  const handleAddToCart = async () => {
-    if (!product) return;
-    const variant = product.node.variants.edges[selectedVariantIdx]?.node;
-    if (!variant) return;
-    await addItem({
-      product,
-      variantId: variant.id,
-      variantTitle: variant.title,
-      price: variant.price,
-      quantity: 1,
-      selectedOptions: variant.selectedOptions || [],
-    });
-    toast.success("Added to cart", { description: product.node.title });
-  };
 
   if (loading) {
     return (

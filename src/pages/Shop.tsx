@@ -4,16 +4,11 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { ShopifyProduct, storefrontApiRequest, STOREFRONT_PRODUCTS_QUERY } from "@/lib/shopify";
-import { useCartStore } from "@/stores/cartStore";
 import { Loader2, ShoppingBag } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { toast } from "sonner";
 
 const Shop = () => {
   const [products, setProducts] = useState<ShopifyProduct[]>([]);
   const [loading, setLoading] = useState(true);
-  const addItem = useCartStore(state => state.addItem);
-  const isCartLoading = useCartStore(state => state.isLoading);
 
   useEffect(() => {
     async function fetchProducts() {
@@ -29,19 +24,6 @@ const Shop = () => {
     fetchProducts();
   }, []);
 
-  const handleAddToCart = async (product: ShopifyProduct) => {
-    const variant = product.node.variants.edges[0]?.node;
-    if (!variant) return;
-    await addItem({
-      product,
-      variantId: variant.id,
-      variantTitle: variant.title,
-      price: variant.price,
-      quantity: 1,
-      selectedOptions: variant.selectedOptions || [],
-    });
-    toast.success("Added to cart", { description: product.node.title });
-  };
 
   return (
     <main className="min-h-screen bg-background">
@@ -108,14 +90,6 @@ const Shop = () => {
                         {price.currencyCode} {parseFloat(price.amount).toFixed(2)}
                       </p>
                     </Link>
-                    <Button
-                      onClick={() => handleAddToCart(product)}
-                      disabled={isCartLoading}
-                      variant="outline"
-                      className="mt-4 w-full border-foreground/20 hover:bg-foreground hover:text-background transition-colors duration-300 text-xs tracking-widest uppercase"
-                    >
-                      {isCartLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : "Add to Cart"}
-                    </Button>
                   </article>
                 );
               })}

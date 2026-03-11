@@ -4,10 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { ShopifyProduct, storefrontApiRequest, STOREFRONT_PRODUCT_BY_HANDLE_QUERY } from "@/lib/shopify";
-import { useCartStore } from "@/stores/cartStore";
-import { Loader2, ArrowLeft, ShoppingBag } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { toast } from "sonner";
+import { Loader2, ShoppingBag } from "lucide-react";
 
 const ProductDetail = () => {
   const { handle } = useParams<{ handle: string }>();
@@ -15,8 +12,6 @@ const ProductDetail = () => {
   const [loading, setLoading] = useState(true);
   const [selectedVariantIdx, setSelectedVariantIdx] = useState(0);
   const [selectedImage, setSelectedImage] = useState(0);
-  const addItem = useCartStore(state => state.addItem);
-  const isCartLoading = useCartStore(state => state.isLoading);
 
   useEffect(() => {
     async function fetchProduct() {
@@ -33,20 +28,6 @@ const ProductDetail = () => {
     if (handle) fetchProduct();
   }, [handle]);
 
-  const handleAddToCart = async () => {
-    if (!product) return;
-    const variant = product.node.variants.edges[selectedVariantIdx]?.node;
-    if (!variant) return;
-    await addItem({
-      product,
-      variantId: variant.id,
-      variantTitle: variant.title,
-      price: variant.price,
-      quantity: 1,
-      selectedOptions: variant.selectedOptions || [],
-    });
-    toast.success("Added to cart", { description: product.node.title });
-  };
 
   if (loading) {
     return (
@@ -171,20 +152,6 @@ const ProductDetail = () => {
                 )
               ))}
 
-              <Button
-                onClick={handleAddToCart}
-                disabled={isCartLoading || !selectedVariant?.availableForSale}
-                className="w-full bg-primary text-primary-foreground hover:bg-primary/90 tracking-widest uppercase text-xs py-6"
-                size="lg"
-              >
-                {isCartLoading ? (
-                  <Loader2 className="w-4 h-4 animate-spin" />
-                ) : !selectedVariant?.availableForSale ? (
-                  "Sold Out"
-                ) : (
-                  "Add to Cart"
-                )}
-              </Button>
             </div>
           </div>
         </div>

@@ -9,7 +9,7 @@ const Privacy = () => {
         <h1 className="font-serif text-4xl lg:text-5xl tracking-wider text-foreground mb-4">Privacy Policy</h1>
         <p className="text-sm text-muted-foreground mb-12">Last updated: March 10, 2026</p>
 
-        <div className="prose prose-neutral max-w-3xl space-y-8 text-foreground/80 font-sans text-sm leading-relaxed text-justify">
+        <div className="max-w-3xl space-y-8 font-sans text-muted-foreground text-lg leading-relaxed text-justify">
           <section>
             <h2 className="font-serif text-xl tracking-wider text-foreground mb-3">1. Introduction</h2>
             <p>Verve ("we", "our", "us") is committed to protecting your personal data. This Privacy Policy explains how we collect, use, store, and share your information when you visit our website or purchase our products, in accordance with the General Data Protection Regulation (GDPR) and other applicable data protection laws.</p>

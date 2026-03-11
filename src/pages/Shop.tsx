@@ -24,19 +24,6 @@ const Shop = () => {
     fetchProducts();
   }, []);
 
-  const handleAddToCart = async (product: ShopifyProduct) => {
-    const variant = product.node.variants.edges[0]?.node;
-    if (!variant) return;
-    await addItem({
-      product,
-      variantId: variant.id,
-      variantTitle: variant.title,
-      price: variant.price,
-      quantity: 1,
-      selectedOptions: variant.selectedOptions || [],
-    });
-    toast.success("Added to cart", { description: product.node.title });
-  };
 
   return (
     <main className="min-h-screen bg-background">

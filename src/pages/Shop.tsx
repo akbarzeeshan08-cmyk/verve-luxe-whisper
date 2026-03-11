@@ -9,8 +9,6 @@ import { Loader2, ShoppingBag } from "lucide-react";
 const Shop = () => {
   const [products, setProducts] = useState<ShopifyProduct[]>([]);
   const [loading, setLoading] = useState(true);
-  const addItem = useCartStore(state => state.addItem);
-  const isCartLoading = useCartStore(state => state.isLoading);
 
   useEffect(() => {
     async function fetchProducts() {

@@ -76,9 +76,9 @@ const ProductCarousel = () => {
                 >
                   <Link
                     to={`/product/${product.node.handle}`}
-                    className="group block"
+                    className="group block bg-card rounded-lg border shadow-sm overflow-hidden"
                   >
-                    <div className="aspect-square overflow-hidden rounded-sm bg-secondary/10 mb-4">
+                    <div className="aspect-square overflow-hidden bg-secondary/10">
                       {image ? (
                         <img
                           src={image.url}
@@ -92,12 +92,14 @@ const ProductCarousel = () => {
                         </div>
                       )}
                     </div>
-                    <h3 className="font-serif text-lg text-foreground group-hover:text-accent transition-colors">
-                      {product.node.title}
-                    </h3>
-                    <p className="font-sans text-sm text-muted-foreground mt-1">
-                      {price.currencyCode} {parseFloat(price.amount).toFixed(2)}
-                    </p>
+                    <div className="p-4 text-center">
+                      <h3 className="font-serif text-lg text-foreground group-hover:text-accent transition-colors mb-2">
+                        {product.node.title}
+                      </h3>
+                      <p className="font-sans text-base font-semibold text-foreground">
+                        {price.currencyCode} {parseFloat(price.amount).toFixed(2)}
+                      </p>
+                    </div>
                   </Link>
                 </CarouselItem>
               );

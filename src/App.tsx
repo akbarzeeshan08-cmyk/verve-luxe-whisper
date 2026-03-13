@@ -16,6 +16,7 @@ import NotFound from "./pages/NotFound";
 const queryClient = new QueryClient();
 
 const AppContent = () => {
+  useCartSync();
   return (
     <BrowserRouter>
       <Routes>

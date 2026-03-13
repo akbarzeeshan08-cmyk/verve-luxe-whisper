@@ -114,13 +114,13 @@ const CategoryPage = () => {
                 const price = product.node.priceRange.minVariantPrice;
                 return (
                   <article key={product.node.id} className="group">
-                    <Link to={`/product/${product.node.handle}`} className="block">
-                      <div className="relative overflow-hidden mb-6 bg-muted aspect-square">
+                    <Link to={`/product/${product.node.handle}`} className="block bg-card rounded-lg border shadow-sm overflow-hidden">
+                      <div className="aspect-square overflow-hidden bg-secondary/10">
                         {image ? (
                           <img
                             src={image.url}
                             alt={image.altText || product.node.title}
-                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                             loading="lazy"
                           />
                         ) : (
@@ -128,13 +128,13 @@ const CategoryPage = () => {
                             <ShoppingBag className="h-12 w-12 text-muted-foreground" />
                           </div>
                         )}
-                        <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/10 transition-colors duration-500" />
                       </div>
-                      <h3 className="font-serif text-xl text-foreground mb-1">{product.node.title}</h3>
-                      <p className="text-sm text-muted-foreground mb-3 line-clamp-2">{product.node.description}</p>
-                      <p className="text-sm font-medium text-foreground tracking-wide">
-                        {price.currencyCode} {parseFloat(price.amount).toFixed(2)}
-                      </p>
+                      <div className="p-4 text-center">
+                        <h3 className="font-serif text-lg text-foreground group-hover:text-accent transition-colors mb-2">{product.node.title}</h3>
+                        <p className="font-sans text-base font-semibold text-foreground">
+                          {price.currencyCode} {parseFloat(price.amount).toFixed(2)}
+                        </p>
+                      </div>
                     </Link>
                   </article>
                 );

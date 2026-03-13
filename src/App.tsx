@@ -12,10 +12,12 @@ import CategoryPage from "./pages/CategoryPage";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import NotFound from "./pages/NotFound";
+import { useCartSync } from "@/hooks/useCartSync";
 
 const queryClient = new QueryClient();
 
 const AppContent = () => {
+  useCartSync();
   return (
     <BrowserRouter>
       <Routes>

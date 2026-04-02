@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from "react";
-import { User, LogIn } from "lucide-react";
+import { useState, useEffect, useRef, useCallback } from "react";
+import { User } from "lucide-react";
 import { CartDrawer } from "@/components/CartDrawer";
 import { SearchOverlay } from "@/components/SearchOverlay";
 import {
@@ -9,6 +9,19 @@ import {
 } from "@/components/ui/popover";
 
 const SHOPIFY_STORE_DOMAIN = "verve-luxe-whisper-0w3sy.myshopify.com";
+
+const openLoginPopup = (url: string) => {
+  const width = 480;
+  const height = 640;
+  const left = window.screenX + (window.outerWidth - width) / 2;
+  const top = window.screenY + (window.outerHeight - height) / 2;
+  const popup = window.open(
+    url,
+    "shopify-login",
+    `width=${width},height=${height},left=${left},top=${top},toolbar=no,menubar=no,scrollbars=yes,resizable=yes`
+  );
+  return popup;
+};
 
 const Navbar = () => {
   const [visible, setVisible] = useState(true);

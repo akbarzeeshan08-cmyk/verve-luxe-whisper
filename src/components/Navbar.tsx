@@ -31,7 +31,7 @@ const Navbar = () => {
           VERVE
         </a>
         <div className="w-24 flex items-center justify-end gap-4">
-          <CartDrawer />
+          <SearchOverlay />
           <a
             href={`https://${SHOPIFY_STORE_DOMAIN}/account/login`}
             target="_blank"
@@ -41,7 +41,7 @@ const Navbar = () => {
           >
             <User className="h-5 w-5" />
           </a>
-          <SearchOverlay />
+          <CartDrawer />
         </div>
       </nav>
     </header>

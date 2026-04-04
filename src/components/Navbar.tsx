@@ -54,7 +54,10 @@ const Navbar = () => {
               <p className="text-xs text-muted-foreground font-medium px-1 mb-2 tracking-wide uppercase">Sign in to your account</p>
               <div className="space-y-2">
                 <button
-                  onClick={() => openLoginPage(`https://${SHOPIFY_STORE_DOMAIN}/account/login`)}
+                  onClick={() => {
+                    const returnUrl = encodeURIComponent(window.location.href);
+                    openLoginPage(`https://shop.app/authentication?redirect_url=${returnUrl}`);
+                  }}
                   className="w-full flex items-center justify-center gap-2.5 rounded-lg px-4 py-2.5 text-sm font-semibold text-white bg-[#5A31F4] hover:bg-[#4b28d4] transition-colors cursor-pointer"
                 >
                   <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none">

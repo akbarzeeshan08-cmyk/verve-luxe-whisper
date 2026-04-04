@@ -66,7 +66,10 @@ const Navbar = () => {
                   Sign in with Shop
                 </button>
                 <button
-                  onClick={() => openLoginPage(`https://${SHOPIFY_STORE_DOMAIN}/account/login`)}
+                  onClick={() => {
+                    const returnUrl = encodeURIComponent(window.location.href);
+                    openLoginPage(`https://${SHOPIFY_STORE_DOMAIN}/account/login?return_url=${returnUrl}`);
+                  }}
                   className="w-full flex items-center justify-center gap-2.5 rounded-lg px-4 py-2.5 text-sm font-semibold text-[#1f1f1f] bg-white border border-[#dadce0] hover:bg-[#f8f9fa] transition-colors cursor-pointer"
                 >
                   <svg className="h-4 w-4" viewBox="0 0 24 24">

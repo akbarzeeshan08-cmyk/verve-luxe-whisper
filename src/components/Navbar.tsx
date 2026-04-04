@@ -10,17 +10,8 @@ import {
 
 const SHOPIFY_STORE_DOMAIN = "verve-luxe-whisper-0w3sy.myshopify.com";
 
-const openLoginPopup = (url: string) => {
-  const width = 480;
-  const height = 640;
-  const left = window.screenX + (window.outerWidth - width) / 2;
-  const top = window.screenY + (window.outerHeight - height) / 2;
-  const popup = window.open(
-    url,
-    "shopify-login",
-    `width=${width},height=${height},left=${left},top=${top},toolbar=no,menubar=no,scrollbars=yes,resizable=yes`
-  );
-  return popup;
+const openLoginPage = (url: string) => {
+  window.open(url, '_blank', 'noopener,noreferrer');
 };
 
 const Navbar = () => {
@@ -63,7 +54,7 @@ const Navbar = () => {
               <p className="text-xs text-muted-foreground font-medium px-1 mb-2 tracking-wide uppercase">Sign in to your account</p>
               <div className="space-y-2">
                 <button
-                  onClick={() => openLoginPopup(`https://${SHOPIFY_STORE_DOMAIN}/account/login`)}
+                  onClick={() => openLoginPage(`https://${SHOPIFY_STORE_DOMAIN}/account/login`)}
                   className="w-full flex items-center justify-center gap-2.5 rounded-lg px-4 py-2.5 text-sm font-semibold text-white bg-[#5A31F4] hover:bg-[#4b28d4] transition-colors cursor-pointer"
                 >
                   <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none">
@@ -72,7 +63,7 @@ const Navbar = () => {
                   Sign in with Shop
                 </button>
                 <button
-                  onClick={() => openLoginPopup(`https://${SHOPIFY_STORE_DOMAIN}/account/login`)}
+                  onClick={() => openLoginPage(`https://${SHOPIFY_STORE_DOMAIN}/account/login`)}
                   className="w-full flex items-center justify-center gap-2.5 rounded-lg px-4 py-2.5 text-sm font-semibold text-[#1f1f1f] bg-white border border-[#dadce0] hover:bg-[#f8f9fa] transition-colors cursor-pointer"
                 >
                   <svg className="h-4 w-4" viewBox="0 0 24 24">
@@ -88,7 +79,7 @@ const Navbar = () => {
                   <div className="relative flex justify-center text-xs"><span className="bg-card px-2 text-muted-foreground">or</span></div>
                 </div>
                 <button
-                  onClick={() => openLoginPopup(`https://${SHOPIFY_STORE_DOMAIN}/account/register`)}
+                  onClick={() => openLoginPage(`https://${SHOPIFY_STORE_DOMAIN}/account/register`)}
                   className="w-full flex items-center justify-center gap-2.5 rounded-lg px-4 py-2.5 text-sm font-semibold text-primary-foreground bg-primary hover:bg-primary/90 transition-colors cursor-pointer"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>

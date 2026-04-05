@@ -4,10 +4,11 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { ShopifyProduct, storefrontApiRequest, STOREFRONT_PRODUCT_BY_HANDLE_QUERY } from "@/lib/shopify";
-import { Loader2, ShoppingBag, Minus, Plus } from "lucide-react";
+import { Loader2, ShoppingBag, Minus, Plus, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useCartStore } from "@/stores/cartStore";
 import { toast } from "sonner";
+import sizeChartImage from "@/assets/dog_size_chart.png";
 
 const ProductDetail = () => {
   const { handle } = useParams<{ handle: string }>();
@@ -16,6 +17,7 @@ const ProductDetail = () => {
   const [selectedVariantIdx, setSelectedVariantIdx] = useState(0);
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
+  const [sizeGuideOpen, setSizeGuideOpen] = useState(false);
   const { addItem, isLoading: cartLoading } = useCartStore();
 
   useEffect(() => {
@@ -32,7 +34,6 @@ const ProductDetail = () => {
     }
     if (handle) fetchProduct();
   }, [handle]);
-
 
   if (loading) {
     return (
@@ -132,7 +133,17 @@ const ProductDetail = () => {
               {product.node.options.map((option) => (
                 option.values.length > 1 && (
                   <div key={option.name} className="mb-6">
-                    <label className="block text-xs tracking-widest uppercase text-muted-foreground mb-2">{option.name}</label>
+                    <div className="flex items-center gap-2 mb-2">
+                      <label className="text-xs tracking-widest uppercase text-muted-foreground">{option.name}</label>
+                      {option.name.toLowerCase() === 'size' && (
+                        <button
+                          onClick={() => setSizeGuideOpen(true)}
+                          className="text-xs text-accent underline hover:text-accent/80 transition-colors"
+                        >
+                          Size Guide
+                        </button>
+                      )}
+                    </div>
                     <div className="flex flex-wrap gap-2">
                       {option.values.map((value) => {
                         const variantIdx = variants.findIndex(v =>
@@ -142,7 +153,7 @@ const ProductDetail = () => {
                           <button
                             key={value}
                             onClick={() => setSelectedVariantIdx(variantIdx >= 0 ? variantIdx : 0)}
-                            className={`px-4 py-2 text-sm border transition-colors ${
+                            className={`px-4 py-2 text-sm rounded-full border transition-colors ${
                               variantIdx === selectedVariantIdx
                                 ? 'border-foreground bg-foreground text-background'
                                 : 'border-border text-foreground hover:border-foreground'
@@ -163,17 +174,17 @@ const ProductDetail = () => {
                   <div>
                     <label className="block text-xs tracking-widest uppercase text-muted-foreground mb-2">Quantity</label>
                     <div className="flex items-center gap-2 w-fit">
-                      <Button variant="outline" size="icon" className="h-10 w-10" onClick={() => setQuantity(q => Math.max(1, q - 1))}>
+                      <Button variant="outline" size="icon" className="h-10 w-10 rounded-full" onClick={() => setQuantity(q => Math.max(1, q - 1))}>
                         <Minus className="h-4 w-4" />
                       </Button>
                       <span className="w-12 text-center text-lg font-medium">{quantity}</span>
-                      <Button variant="outline" size="icon" className="h-10 w-10" onClick={() => setQuantity(q => q + 1)}>
+                      <Button variant="outline" size="icon" className="h-10 w-10 rounded-full" onClick={() => setQuantity(q => q + 1)}>
                         <Plus className="h-4 w-4" />
                       </Button>
                     </div>
                   </div>
                   <Button
-                    className="w-full h-12 text-base"
+                    className="w-full h-12 text-base rounded-full"
                     size="lg"
                     disabled={cartLoading || !selectedVariant.availableForSale}
                     onClick={async () => {
@@ -197,6 +208,22 @@ const ProductDetail = () => {
           </div>
         </div>
       </section>
+
+      {/* Size Guide Modal */}
+      {sizeGuideOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60" onClick={() => setSizeGuideOpen(false)}>
+          <div className="relative bg-background rounded-lg shadow-xl max-w-lg w-full mx-4" onClick={e => e.stopPropagation()}>
+            <button
+              onClick={() => setSizeGuideOpen(false)}
+              className="absolute top-3 right-3 rounded-full p-1 hover:bg-muted transition-colors z-10"
+            >
+              <X className="h-5 w-5 text-foreground" />
+            </button>
+            <img src={sizeChartImage} alt="Dog Collar Size Chart" className="w-full rounded-lg" />
+          </div>
+        </div>
+      )}
+
       <Footer />
     </main>
   );

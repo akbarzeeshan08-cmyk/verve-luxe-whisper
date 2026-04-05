@@ -4,7 +4,10 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { ShopifyProduct, storefrontApiRequest, STOREFRONT_PRODUCT_BY_HANDLE_QUERY } from "@/lib/shopify";
-import { Loader2, ShoppingBag } from "lucide-react";
+import { Loader2, ShoppingBag, Minus, Plus } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useCartStore } from "@/stores/cartStore";
+import { toast } from "sonner";
 
 const ProductDetail = () => {
   const { handle } = useParams<{ handle: string }>();
@@ -12,6 +15,8 @@ const ProductDetail = () => {
   const [loading, setLoading] = useState(true);
   const [selectedVariantIdx, setSelectedVariantIdx] = useState(0);
   const [selectedImage, setSelectedImage] = useState(0);
+  const [quantity, setQuantity] = useState(1);
+  const { addItem, isLoading: cartLoading } = useCartStore();
 
   useEffect(() => {
     async function fetchProduct() {
@@ -152,6 +157,42 @@ const ProductDetail = () => {
                 )
               ))}
 
+              {/* Quantity & Add to Cart */}
+              {selectedVariant && (
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-xs tracking-widest uppercase text-muted-foreground mb-2">Quantity</label>
+                    <div className="flex items-center gap-2 w-fit">
+                      <Button variant="outline" size="icon" className="h-10 w-10" onClick={() => setQuantity(q => Math.max(1, q - 1))}>
+                        <Minus className="h-4 w-4" />
+                      </Button>
+                      <span className="w-12 text-center text-lg font-medium">{quantity}</span>
+                      <Button variant="outline" size="icon" className="h-10 w-10" onClick={() => setQuantity(q => q + 1)}>
+                        <Plus className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  </div>
+                  <Button
+                    className="w-full h-12 text-base"
+                    size="lg"
+                    disabled={cartLoading || !selectedVariant.availableForSale}
+                    onClick={async () => {
+                      await addItem({
+                        product: product!,
+                        variantId: selectedVariant.id,
+                        variantTitle: selectedVariant.title,
+                        price: selectedVariant.price,
+                        quantity,
+                        selectedOptions: selectedVariant.selectedOptions || [],
+                      });
+                      toast.success(`${product!.node.title} added to cart`, { position: "top-center" });
+                      setQuantity(1);
+                    }}
+                  >
+                    {cartLoading ? <Loader2 className="h-5 w-5 animate-spin" /> : !selectedVariant.availableForSale ? "Sold Out" : "Add to Cart"}
+                  </Button>
+                </div>
+              )}
             </div>
           </div>
         </div>

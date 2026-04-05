@@ -152,6 +152,11 @@ const ProductDetail = () => {
                           </button>
                         );
                       })}
+                    </div>
+                  </div>
+                )
+              ))}
+
               {/* Quantity & Add to Cart */}
               {selectedVariant && (
                 <div className="space-y-4">
@@ -189,11 +194,8 @@ const ProductDetail = () => {
                 </div>
               )}
             </div>
-                )
-              ))}
-
-            </div>
           </div>
+        </div>
         </div>
       </section>
       <Footer />

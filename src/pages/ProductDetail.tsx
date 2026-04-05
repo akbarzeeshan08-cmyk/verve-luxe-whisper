@@ -196,7 +196,6 @@ const ProductDetail = () => {
             </div>
           </div>
         </div>
-        </div>
       </section>
       <Footer />
     </main>

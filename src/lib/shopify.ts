@@ -3,7 +3,7 @@ import { toast } from "sonner";
 const SHOPIFY_API_VERSION = '2025-07';
 const SHOPIFY_STORE_PERMANENT_DOMAIN = 'verve-luxe-whisper-0w3sy.myshopify.com';
 const SHOPIFY_STOREFRONT_URL = `https://${SHOPIFY_STORE_PERMANENT_DOMAIN}/api/${SHOPIFY_API_VERSION}/graphql.json`;
-const SHOPIFY_STOREFRONT_TOKEN = '239c7a809bc7f10ba6f74a64a032c673';
+const SHOPIFY_STOREFRONT_TOKEN = '7e2e348afc23d5d3f3335c0452217eb4';
 
 export interface ShopifyProduct {
   node: {

@@ -225,6 +225,7 @@ const ProductDetail = () => {
         </div>
       )}
 
+      <SimilarProducts currentProductId={product.node.id} />
       <Footer />
     </main>
   );

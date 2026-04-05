@@ -152,8 +152,43 @@ const ProductDetail = () => {
                           </button>
                         );
                       })}
+              {/* Quantity & Add to Cart */}
+              {selectedVariant && (
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-xs tracking-widest uppercase text-muted-foreground mb-2">Quantity</label>
+                    <div className="flex items-center gap-2 w-fit">
+                      <Button variant="outline" size="icon" className="h-10 w-10" onClick={() => setQuantity(q => Math.max(1, q - 1))}>
+                        <Minus className="h-4 w-4" />
+                      </Button>
+                      <span className="w-12 text-center text-lg font-medium">{quantity}</span>
+                      <Button variant="outline" size="icon" className="h-10 w-10" onClick={() => setQuantity(q => q + 1)}>
+                        <Plus className="h-4 w-4" />
+                      </Button>
                     </div>
                   </div>
+                  <Button
+                    className="w-full h-12 text-base"
+                    size="lg"
+                    disabled={cartLoading || !selectedVariant.availableForSale}
+                    onClick={async () => {
+                      await addItem({
+                        product: product!,
+                        variantId: selectedVariant.id,
+                        variantTitle: selectedVariant.title,
+                        price: selectedVariant.price,
+                        quantity,
+                        selectedOptions: selectedVariant.selectedOptions || [],
+                      });
+                      toast.success(`${product!.node.title} added to cart`, { position: "top-center" });
+                      setQuantity(1);
+                    }}
+                  >
+                    {cartLoading ? <Loader2 className="h-5 w-5 animate-spin" /> : !selectedVariant.availableForSale ? "Sold Out" : "Add to Cart"}
+                  </Button>
+                </div>
+              )}
+            </div>
                 )
               ))}
 

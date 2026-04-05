@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 import { User } from "lucide-react";
 import { CartDrawer } from "@/components/CartDrawer";
 import { SearchOverlay } from "@/components/SearchOverlay";
@@ -9,10 +9,6 @@ import {
 } from "@/components/ui/popover";
 
 const SHOPIFY_STORE_DOMAIN = "verve-luxe-whisper-0w3sy.myshopify.com";
-
-const openLoginPage = (url: string) => {
-  window.open(url, '_blank', 'noopener,noreferrer');
-};
 
 const Navbar = () => {
   const [visible, setVisible] = useState(true);
@@ -27,6 +23,31 @@ const Navbar = () => {
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const handleShopLogin = () => {
+    const returnUrl = encodeURIComponent(window.location.href);
+    window.open(
+      `https://shopify.com/authentication/${SHOPIFY_STORE_DOMAIN}?return_to=${returnUrl}`,
+      "_blank",
+      "noopener,noreferrer"
+    );
+  };
+
+  const handleGoogleLogin = () => {
+    window.open(
+      `https://${SHOPIFY_STORE_DOMAIN}/account/login`,
+      "_blank",
+      "noopener,noreferrer"
+    );
+  };
+
+  const handleCreateAccount = () => {
+    window.open(
+      `https://${SHOPIFY_STORE_DOMAIN}/account/register`,
+      "_blank",
+      "noopener,noreferrer"
+    );
+  };
 
   return (
     <header
@@ -54,10 +75,7 @@ const Navbar = () => {
               <p className="text-xs text-muted-foreground font-medium px-1 mb-2 tracking-wide uppercase">Sign in to your account</p>
               <div className="space-y-2">
                 <button
-                  onClick={() => {
-                    const returnUrl = encodeURIComponent(window.location.href);
-                    openLoginPage(`https://shop.app/authentication?redirect_url=${returnUrl}`);
-                  }}
+                  onClick={handleShopLogin}
                   className="w-full flex items-center justify-center gap-2.5 rounded-lg px-4 py-2.5 text-sm font-semibold text-white bg-[#5A31F4] hover:bg-[#4b28d4] transition-colors cursor-pointer"
                 >
                   <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none">
@@ -66,10 +84,7 @@ const Navbar = () => {
                   Sign in with Shop
                 </button>
                 <button
-                  onClick={() => {
-                    const returnUrl = encodeURIComponent(window.location.href);
-                    openLoginPage(`https://${SHOPIFY_STORE_DOMAIN}/account/login?return_url=${returnUrl}`);
-                  }}
+                  onClick={handleGoogleLogin}
                   className="w-full flex items-center justify-center gap-2.5 rounded-lg px-4 py-2.5 text-sm font-semibold text-[#1f1f1f] bg-white border border-[#dadce0] hover:bg-[#f8f9fa] transition-colors cursor-pointer"
                 >
                   <svg className="h-4 w-4" viewBox="0 0 24 24">
@@ -85,7 +100,7 @@ const Navbar = () => {
                   <div className="relative flex justify-center text-xs"><span className="bg-card px-2 text-muted-foreground">or</span></div>
                 </div>
                 <button
-                  onClick={() => openLoginPage(`https://${SHOPIFY_STORE_DOMAIN}/account/register`)}
+                  onClick={handleCreateAccount}
                   className="w-full flex items-center justify-center gap-2.5 rounded-lg px-4 py-2.5 text-sm font-semibold text-primary-foreground bg-primary hover:bg-primary/90 transition-colors cursor-pointer"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>

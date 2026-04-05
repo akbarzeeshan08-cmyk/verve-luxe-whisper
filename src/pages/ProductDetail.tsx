@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SimilarProducts from "@/components/SimilarProducts";
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { ShopifyProduct, storefrontApiRequest, STOREFRONT_PRODUCT_BY_HANDLE_QUERY } from "@/lib/shopify";
 import { Loader2, ShoppingBag, Minus, Plus, X } from "lucide-react";
@@ -224,6 +225,7 @@ const ProductDetail = () => {
         </div>
       )}
 
+      <SimilarProducts currentProductId={product.node.id} />
       <Footer />
     </main>
   );

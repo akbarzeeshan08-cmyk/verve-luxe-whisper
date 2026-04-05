@@ -15,6 +15,8 @@ const ProductDetail = () => {
   const [loading, setLoading] = useState(true);
   const [selectedVariantIdx, setSelectedVariantIdx] = useState(0);
   const [selectedImage, setSelectedImage] = useState(0);
+  const [quantity, setQuantity] = useState(1);
+  const { addItem, isLoading: cartLoading } = useCartStore();
 
   useEffect(() => {
     async function fetchProduct() {

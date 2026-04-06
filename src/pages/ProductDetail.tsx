@@ -22,8 +22,22 @@ const ProductDetail = () => {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIdx, setLightboxIdx] = useState(0);
   const { addItem, isLoading: cartLoading } = useCartStore();
+  const touchStart = useRef<number | null>(null);
 
-  useEffect(() => {
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    touchStart.current = e.touches[0].clientX;
+  }, []);
+
+  const handleTouchEnd = useCallback((e: React.TouchEvent) => {
+    if (touchStart.current === null || !product) return;
+    const diff = touchStart.current - e.changedTouches[0].clientX;
+    const len = product.node.images.edges.length;
+    if (Math.abs(diff) > 50) {
+      setLightboxIdx(i => diff > 0 ? (i + 1) % len : (i - 1 + len) % len);
+    }
+    touchStart.current = null;
+  }, [product]);
+
     async function fetchProduct() {
       try {
         const data = await storefrontApiRequest(STOREFRONT_PRODUCT_BY_HANDLE_QUERY, { handle });

@@ -19,6 +19,8 @@ const ProductDetail = () => {
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [sizeGuideOpen, setSizeGuideOpen] = useState(false);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxIdx, setLightboxIdx] = useState(0);
   const { addItem, isLoading: cartLoading } = useCartStore();
 
   useEffect(() => {
@@ -92,12 +94,17 @@ const ProductDetail = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
             {/* Images */}
             <div>
-              <div className="aspect-square bg-muted overflow-hidden mb-4">
+              <div
+                className="aspect-square bg-muted overflow-hidden mb-4 cursor-zoom-in"
+                onClick={() => { setLightboxIdx(selectedImage); setLightboxOpen(true); }}
+              >
                 {images[selectedImage] ? (
                   <img
                     src={images[selectedImage].node.url}
                     alt={images[selectedImage].node.altText || product.node.title}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover select-none pointer-events-none"
+                    draggable={false}
+                    onContextMenu={(e) => e.preventDefault()}
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center">
@@ -113,7 +120,13 @@ const ProductDetail = () => {
                       onClick={() => setSelectedImage(i)}
                       className={`w-16 h-16 overflow-hidden border-2 transition-colors ${i === selectedImage ? 'border-accent' : 'border-transparent'}`}
                     >
-                      <img src={img.node.url} alt={img.node.altText || ""} className="w-full h-full object-cover" />
+                      <img
+                        src={img.node.url}
+                        alt={img.node.altText || ""}
+                        className="w-full h-full object-cover select-none pointer-events-none"
+                        draggable={false}
+                        onContextMenu={(e) => e.preventDefault()}
+                      />
                     </button>
                   ))}
                 </div>
@@ -209,6 +222,32 @@ const ProductDetail = () => {
           </div>
         </div>
       </section>
+
+      {/* Image Lightbox */}
+      {lightboxOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80" onClick={() => setLightboxOpen(false)}>
+          <div className="relative w-[90vw] h-[90vh] max-w-5xl flex flex-col" onClick={e => e.stopPropagation()}>
+            <button
+              onClick={() => setLightboxOpen(false)}
+              className="absolute top-3 right-3 z-10 rounded-full bg-background/80 p-2 hover:bg-background transition-colors"
+            >
+              <X className="h-5 w-5 text-foreground" />
+            </button>
+            <div className="flex-1 overflow-y-auto space-y-4 p-4">
+              {images.map((img, i) => (
+                <img
+                  key={i}
+                  src={img.node.url}
+                  alt={img.node.altText || product.node.title}
+                  className="w-full rounded-lg select-none"
+                  draggable={false}
+                  onContextMenu={(e) => e.preventDefault()}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Size Guide Modal */}
       {sizeGuideOpen && (

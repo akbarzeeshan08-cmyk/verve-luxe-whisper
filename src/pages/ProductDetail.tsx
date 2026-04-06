@@ -94,12 +94,17 @@ const ProductDetail = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
             {/* Images */}
             <div>
-              <div className="aspect-square bg-muted overflow-hidden mb-4">
+              <div
+                className="aspect-square bg-muted overflow-hidden mb-4 cursor-zoom-in"
+                onClick={() => { setLightboxIdx(selectedImage); setLightboxOpen(true); }}
+              >
                 {images[selectedImage] ? (
                   <img
                     src={images[selectedImage].node.url}
                     alt={images[selectedImage].node.altText || product.node.title}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover select-none pointer-events-none"
+                    draggable={false}
+                    onContextMenu={(e) => e.preventDefault()}
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center">
@@ -115,7 +120,13 @@ const ProductDetail = () => {
                       onClick={() => setSelectedImage(i)}
                       className={`w-16 h-16 overflow-hidden border-2 transition-colors ${i === selectedImage ? 'border-accent' : 'border-transparent'}`}
                     >
-                      <img src={img.node.url} alt={img.node.altText || ""} className="w-full h-full object-cover" />
+                      <img
+                        src={img.node.url}
+                        alt={img.node.altText || ""}
+                        className="w-full h-full object-cover select-none pointer-events-none"
+                        draggable={false}
+                        onContextMenu={(e) => e.preventDefault()}
+                      />
                     </button>
                   ))}
                 </div>

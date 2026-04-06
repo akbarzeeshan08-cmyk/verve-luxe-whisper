@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { useParams, Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -22,6 +22,21 @@ const ProductDetail = () => {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIdx, setLightboxIdx] = useState(0);
   const { addItem, isLoading: cartLoading } = useCartStore();
+  const touchStart = useRef<number | null>(null);
+
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    touchStart.current = e.touches[0].clientX;
+  }, []);
+
+  const handleTouchEnd = useCallback((e: React.TouchEvent) => {
+    if (touchStart.current === null || !product) return;
+    const diff = touchStart.current - e.changedTouches[0].clientX;
+    const len = product.node.images.edges.length;
+    if (Math.abs(diff) > 50) {
+      setLightboxIdx(i => diff > 0 ? (i + 1) % len : (i - 1 + len) % len);
+    }
+    touchStart.current = null;
+  }, [product]);
 
   useEffect(() => {
     async function fetchProduct() {
@@ -236,7 +251,7 @@ const ProductDetail = () => {
 
       {/* Image Lightbox */}
       {lightboxOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90" onClick={() => setLightboxOpen(false)}>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90" onClick={() => setLightboxOpen(false)} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
           <button
             onClick={() => setLightboxOpen(false)}
             className="absolute top-4 right-4 z-10 rounded-full bg-background/80 p-2 hover:bg-background transition-colors"

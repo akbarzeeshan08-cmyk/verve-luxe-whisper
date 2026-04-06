@@ -38,6 +38,17 @@ const ProductDetail = () => {
     if (handle) fetchProduct();
   }, [handle]);
 
+  useEffect(() => {
+    if (!lightboxOpen) return;
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "ArrowLeft") setLightboxIdx(i => (i - 1 + (product?.node.images.edges.length || 1)) % (product?.node.images.edges.length || 1));
+      else if (e.key === "ArrowRight") setLightboxIdx(i => (i + 1) % (product?.node.images.edges.length || 1));
+      else if (e.key === "Escape") setLightboxOpen(false);
+    };
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [lightboxOpen, product]);
+
   if (loading) {
     return (
       <main className="min-h-screen bg-background">

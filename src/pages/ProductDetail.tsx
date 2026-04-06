@@ -19,6 +19,8 @@ const ProductDetail = () => {
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [sizeGuideOpen, setSizeGuideOpen] = useState(false);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxIdx, setLightboxIdx] = useState(0);
   const { addItem, isLoading: cartLoading } = useCartStore();
 
   useEffect(() => {

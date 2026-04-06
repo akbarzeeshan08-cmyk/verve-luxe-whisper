@@ -225,27 +225,58 @@ const ProductDetail = () => {
 
       {/* Image Lightbox */}
       {lightboxOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80" onClick={() => setLightboxOpen(false)}>
-          <div className="relative w-[90vw] h-[90vh] max-w-5xl flex flex-col" onClick={e => e.stopPropagation()}>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90" onClick={() => setLightboxOpen(false)}>
+          <button
+            onClick={() => setLightboxOpen(false)}
+            className="absolute top-4 right-4 z-10 rounded-full bg-background/80 p-2 hover:bg-background transition-colors"
+          >
+            <X className="h-5 w-5 text-foreground" />
+          </button>
+
+          {/* Left arrow */}
+          {images.length > 1 && (
             <button
-              onClick={() => setLightboxOpen(false)}
-              className="absolute top-3 right-3 z-10 rounded-full bg-background/80 p-2 hover:bg-background transition-colors"
+              onClick={(e) => { e.stopPropagation(); setLightboxIdx((lightboxIdx - 1 + images.length) % images.length); }}
+              className="absolute left-4 z-10 rounded-full bg-background/80 p-3 hover:bg-background transition-colors"
             >
-              <X className="h-5 w-5 text-foreground" />
+              <Minus className="h-5 w-5 text-foreground rotate-0" style={{ display: 'none' }} />
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-foreground"><path d="m15 18-6-6 6-6"/></svg>
             </button>
-            <div className="flex-1 overflow-y-auto space-y-4 p-4">
-              {images.map((img, i) => (
-                <img
+          )}
+
+          {/* Image */}
+          <div className="max-w-[90vw] max-h-[90vh] flex items-center justify-center" onClick={e => e.stopPropagation()}>
+            <img
+              src={images[lightboxIdx]?.node.url}
+              alt={images[lightboxIdx]?.node.altText || product.node.title}
+              className="max-w-[90vw] max-h-[90vh] object-contain rounded-lg select-none pointer-events-none"
+              draggable={false}
+              onContextMenu={(e) => e.preventDefault()}
+            />
+          </div>
+
+          {/* Right arrow */}
+          {images.length > 1 && (
+            <button
+              onClick={(e) => { e.stopPropagation(); setLightboxIdx((lightboxIdx + 1) % images.length); }}
+              className="absolute right-4 z-10 rounded-full bg-background/80 p-3 hover:bg-background transition-colors"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-foreground"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+          )}
+
+          {/* Dots */}
+          {images.length > 1 && (
+            <div className="absolute bottom-6 flex gap-2">
+              {images.map((_, i) => (
+                <button
                   key={i}
-                  src={img.node.url}
-                  alt={img.node.altText || product.node.title}
-                  className="w-full rounded-lg select-none"
-                  draggable={false}
-                  onContextMenu={(e) => e.preventDefault()}
+                  onClick={(e) => { e.stopPropagation(); setLightboxIdx(i); }}
+                  className={`w-2.5 h-2.5 rounded-full transition-colors ${i === lightboxIdx ? 'bg-white' : 'bg-white/40'}`}
                 />
               ))}
             </div>
-          </div>
+          )}
         </div>
       )}
 

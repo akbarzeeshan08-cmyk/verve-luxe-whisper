@@ -223,6 +223,32 @@ const ProductDetail = () => {
         </div>
       </section>
 
+      {/* Image Lightbox */}
+      {lightboxOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80" onClick={() => setLightboxOpen(false)}>
+          <div className="relative w-[90vw] h-[90vh] max-w-5xl flex flex-col" onClick={e => e.stopPropagation()}>
+            <button
+              onClick={() => setLightboxOpen(false)}
+              className="absolute top-3 right-3 z-10 rounded-full bg-background/80 p-2 hover:bg-background transition-colors"
+            >
+              <X className="h-5 w-5 text-foreground" />
+            </button>
+            <div className="flex-1 overflow-y-auto space-y-4 p-4">
+              {images.map((img, i) => (
+                <img
+                  key={i}
+                  src={img.node.url}
+                  alt={img.node.altText || product.node.title}
+                  className="w-full rounded-lg select-none"
+                  draggable={false}
+                  onContextMenu={(e) => e.preventDefault()}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Size Guide Modal */}
       {sizeGuideOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60" onClick={() => setSizeGuideOpen(false)}>

@@ -62,8 +62,10 @@ const SimilarProducts = ({ currentProductId, productType }: SimilarProductsProps
                     <img
                       src={image.url}
                       alt={image.altText || product.node.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 select-none pointer-events-none"
                       loading="lazy"
+                      draggable={false}
+                      onContextMenu={(e) => e.preventDefault()}
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center text-muted-foreground">No image</div>

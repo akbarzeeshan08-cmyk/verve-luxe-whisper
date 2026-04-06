@@ -38,6 +38,7 @@ const ProductDetail = () => {
     touchStart.current = null;
   }, [product]);
 
+  useEffect(() => {
     async function fetchProduct() {
       try {
         const data = await storefrontApiRequest(STOREFRONT_PRODUCT_BY_HANDLE_QUERY, { handle });

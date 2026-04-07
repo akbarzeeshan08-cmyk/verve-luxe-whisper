@@ -12,6 +12,7 @@ import CategoryPage from "./pages/CategoryPage";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import ShippingReturns from "./pages/ShippingReturns";
+import TermsConditions from "./pages/TermsConditions";
 import NotFound from "./pages/NotFound";
 import { useCartSync } from "@/hooks/useCartSync";
 
@@ -30,6 +31,7 @@ const AppContent = () => {
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/shipping-returns" element={<ShippingReturns />} />
+        <Route path="/terms-conditions" element={<TermsConditions />} />
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<NotFound />} />
       </Routes>

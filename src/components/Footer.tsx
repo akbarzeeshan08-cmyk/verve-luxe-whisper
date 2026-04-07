@@ -49,13 +49,19 @@ const Footer = () => {
               Support
             </h4>
             <ul className="space-y-3">
-{["Contact", "Shipping & Returns", "Size Guide"].map((item) =>
-              <li key={item} className="font-semibold">
-                  <a href={item === "Shipping & Returns" ? "/shipping-returns" : "#"} className="font-sans text-sm text-primary-foreground/70 hover:text-accent transition-colors duration-300">
+{["Contact", "Shipping & Returns", "Terms & Conditions", "Size Guide"].map((item) => {
+                const linkMap: Record<string, string> = {
+                  "Shipping & Returns": "/shipping-returns",
+                  "Terms & Conditions": "/terms-conditions",
+                };
+                return (
+                <li key={item} className="font-semibold">
+                  <a href={linkMap[item] || "#"} className="font-sans text-sm text-primary-foreground/70 hover:text-accent transition-colors duration-300">
                     {item}
                   </a>
                 </li>
-              )}
+                );
+              })}
             </ul>
           </div>
         </div>

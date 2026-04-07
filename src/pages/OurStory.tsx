@@ -141,34 +141,44 @@ const OurStory = () => {
           <h2 className="font-serif text-3xl md:text-4xl text-foreground leading-tight mb-16 text-center">
             Our Principles
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-5xl mx-auto">
             {[
               {
                 title: "Uncompromising Quality",
+                icon: "◆",
                 description:
                   "We use only full-grain leather and solid brass. No shortcuts, no synthetics, no compromises. Every piece is built to last a lifetime.",
               },
               {
                 title: "Crafted by Hand",
+                icon: "✦",
                 description:
                   "Each item is hand-cut, hand-stitched, and hand-finished by artisans who take immense pride in their work. No two pieces are exactly alike.",
               },
               {
                 title: "Love, Always",
+                icon: "♥",
                 description:
                   "At the heart of everything we do is a deep respect for the bond between you and your companion. That love is what drives every stitch.",
               },
             ].map((value) => (
-              <Card key={value.title} className="border-border/50 shadow-md bg-card">
-                <CardHeader className="text-center pb-2">
-                  <CardTitle className="font-serif text-xl text-foreground">{value.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="font-sans text-muted-foreground leading-relaxed text-justify">
-                    {value.description}
-                  </p>
-                </CardContent>
-              </Card>
+              <div
+                key={value.title}
+                className="group relative bg-card border border-border/40 p-8 pt-12 text-center transition-all duration-500 hover:shadow-lg hover:border-accent/30 hover:-translate-y-1"
+              >
+                {/* Top accent line */}
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-12 h-[2px] bg-accent transition-all duration-500 group-hover:w-20" />
+                {/* Icon */}
+                <span className="inline-block text-accent text-2xl mb-5 opacity-70 group-hover:opacity-100 transition-opacity duration-500">
+                  {value.icon}
+                </span>
+                <h3 className="font-serif text-xl text-foreground mb-4 tracking-wide">
+                  {value.title}
+                </h3>
+                <p className="font-sans text-muted-foreground leading-relaxed text-justify text-[0.935rem]">
+                  {value.description}
+                </p>
+              </div>
             ))}
           </div>
         </div>

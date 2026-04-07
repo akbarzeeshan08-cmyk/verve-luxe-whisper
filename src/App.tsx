@@ -11,6 +11,7 @@ import ProductDetail from "./pages/ProductDetail";
 import CategoryPage from "./pages/CategoryPage";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
+import ShippingReturns from "./pages/ShippingReturns";
 import NotFound from "./pages/NotFound";
 import { useCartSync } from "@/hooks/useCartSync";
 

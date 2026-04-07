@@ -49,9 +49,9 @@ const Footer = () => {
               Support
             </h4>
             <ul className="space-y-3">
-              {["Contact", "Shipping", "Returns", "Size Guide"].map((item) =>
+{["Contact", "Shipping & Returns", "Size Guide"].map((item) =>
               <li key={item} className="font-semibold">
-                  <a href="#" className="font-sans text-sm text-primary-foreground/70 hover:text-accent transition-colors duration-300">
+                  <a href={item === "Shipping & Returns" ? "/shipping-returns" : "#"} className="font-sans text-sm text-primary-foreground/70 hover:text-accent transition-colors duration-300">
                     {item}
                   </a>
                 </li>

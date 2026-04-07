@@ -12,6 +12,7 @@ import CategoryPage from "./pages/CategoryPage";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import ShippingReturns from "./pages/ShippingReturns";
+import TermsConditions from "./pages/TermsConditions";
 import NotFound from "./pages/NotFound";
 import { useCartSync } from "@/hooks/useCartSync";
 

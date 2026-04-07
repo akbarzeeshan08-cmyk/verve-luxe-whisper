@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import brandStoryImg from "@/assets/brand-story.jpg";
 import heroImage from "@/assets/hero-image.jpg";
 

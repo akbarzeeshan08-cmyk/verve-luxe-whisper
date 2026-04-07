@@ -141,7 +141,7 @@ const OurStory = () => {
           <h2 className="font-serif text-3xl md:text-4xl text-foreground leading-tight mb-16 text-center">
             Our Principles
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             {[
               {
                 title: "Uncompromising Quality",
@@ -159,12 +159,16 @@ const OurStory = () => {
                   "At the heart of everything we do is a deep respect for the bond between you and your companion. That love is what drives every stitch.",
               },
             ].map((value) => (
-              <div key={value.title} className="text-center">
-                <h3 className="font-serif text-xl text-foreground mb-4">{value.title}</h3>
-                <p className="font-sans text-muted-foreground leading-relaxed">
-                  {value.description}
-                </p>
-              </div>
+              <Card key={value.title} className="border-border/50 shadow-md bg-card">
+                <CardHeader className="text-center pb-2">
+                  <CardTitle className="font-serif text-xl text-foreground">{value.title}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="font-sans text-muted-foreground leading-relaxed text-justify">
+                    {value.description}
+                  </p>
+                </CardContent>
+              </Card>
             ))}
           </div>
         </div>

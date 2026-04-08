@@ -31,7 +31,7 @@ const NgoSupport = () => {
   }, []);
 
   return (
-    <section className="py-20 lg:py-28 bg-muted">
+    <section className="py-20 bg-muted lg:py-[30px] my-0">
       <div className="container mx-auto px-6 lg:px-12">
         <div className="max-w-3xl mx-auto text-center mb-14">
           <p className="text-sm font-sans tracking-[0.3em] uppercase text-accent mb-4 font-semibold">

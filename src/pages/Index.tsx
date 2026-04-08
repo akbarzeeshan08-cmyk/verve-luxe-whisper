@@ -3,6 +3,7 @@ import Hero from "@/components/Hero";
 import FeaturedCollections from "@/components/FeaturedCollections";
 import ProductCarousel from "@/components/ProductCarousel";
 import Footer from "@/components/Footer";
+import NgoSupport from "@/components/NgoSupport";
 
 const Index = () => {
   return (
@@ -11,6 +12,7 @@ const Index = () => {
       <Hero />
       <FeaturedCollections />
       <ProductCarousel />
+      <NgoSupport />
       <Footer />
     </main>
   );

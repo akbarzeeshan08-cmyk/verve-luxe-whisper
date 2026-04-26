@@ -1,59 +1,31 @@
-import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
-import { ShopifyProduct, storefrontApiRequest, STOREFRONT_PRODUCTS_QUERY } from "@/lib/shopify";
-import { Loader2, ShoppingBag } from "lucide-react";
+import { ShoppingBag } from "lucide-react";
 import { SEO } from "@/components/SEO";
 
-const CATEGORY_META: Record<string, { title: string; subtitle: string; description: string; query: string }> = {
+const CATEGORY_META: Record<string, { title: string; subtitle: string; description: string }> = {
   collars: {
     title: "Collars",
     subtitle: "Premium Leather",
     description: "Hand-stitched from the finest full-grain leather with solid brass hardware.",
-    query: "product_type:collar OR title:collar",
   },
   leashes: {
     title: "Leashes",
     subtitle: "Braided Leather",
     description: "Durable, elegant leashes designed for comfort and lasting beauty.",
-    query: "product_type:leash OR title:leash",
   },
   "dog-coats": {
     title: "Dog Coats",
     subtitle: "Tailored Outerwear",
     description: "Stylish, weather-ready coats with leather trim and artisan details.",
-    query: "product_type:coat OR title:coat",
   },
 };
 
 const CategoryPage = () => {
   const { category } = useParams<{ category: string }>();
   const meta = category ? CATEGORY_META[category] : undefined;
-
-  const [products, setProducts] = useState<ShopifyProduct[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    async function fetchProducts() {
-      if (!meta) return;
-      try {
-        const data = await storefrontApiRequest(STOREFRONT_PRODUCTS_QUERY, {
-          first: 50,
-          query: meta.query,
-        });
-        setProducts(data?.data?.products?.edges || []);
-      } catch (error) {
-        console.error("Failed to fetch products:", error);
-      } finally {
-        setLoading(false);
-      }
-    }
-    setLoading(true);
-    fetchProducts();
-  }, [meta?.query]);
-
 
   if (!meta) {
     return (
@@ -73,12 +45,6 @@ const CategoryPage = () => {
         title={`${meta.title} — ${meta.subtitle} | Verve`}
         description={meta.description}
         canonicalPath={`/collections/${category}`}
-        jsonLd={{
-          "@context": "https://schema.org",
-          "@type": "CollectionPage",
-          name: `${meta.title} — Verve`,
-          description: meta.description,
-        }}
       />
       <Navbar />
       <section className="pt-32 pb-24 px-6 lg:px-12">
@@ -96,63 +62,14 @@ const CategoryPage = () => {
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
-          <div className="text-center mb-16">
-            <p className="text-sm font-sans tracking-[0.3em] uppercase text-accent mb-4">
-              {meta.subtitle}
-            </p>
-            <h1 className="font-serif text-4xl md:text-5xl text-foreground mb-4">
-              {meta.title}
-            </h1>
+          <div className="text-center py-20">
+            <ShoppingBag className="h-16 w-16 text-muted-foreground mx-auto mb-6" />
+            <p className="text-sm font-sans tracking-[0.3em] uppercase text-accent mb-4">{meta.subtitle}</p>
+            <h1 className="font-serif text-4xl md:text-5xl text-foreground mb-4">{meta.title}</h1>
             <div className="w-12 h-px bg-accent mx-auto mb-6" />
             <p className="text-muted-foreground max-w-lg mx-auto">{meta.description}</p>
+            <p className="text-muted-foreground mt-6">Coming soon.</p>
           </div>
-
-          {loading ? (
-            <div className="flex justify-center py-20">
-              <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
-            </div>
-          ) : products.length === 0 ? (
-            <div className="text-center py-20">
-              <ShoppingBag className="h-16 w-16 text-muted-foreground mx-auto mb-6" />
-              <h2 className="font-serif text-2xl text-foreground mb-2">No products yet</h2>
-              <p className="text-muted-foreground max-w-md mx-auto">
-                We're curating our {meta.title.toLowerCase()} collection. Check back soon.
-              </p>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
-              {products.map((product) => {
-                const image = product.node.images.edges[0]?.node;
-                const price = product.node.priceRange.minVariantPrice;
-                return (
-                  <article key={product.node.id} className="group">
-                    <Link to={`/product/${product.node.handle}`} className="block bg-card rounded-lg border shadow-sm overflow-hidden">
-                      <div className="aspect-square overflow-hidden bg-secondary/10">
-                        {image ? (
-                          <img
-                            src={image.url}
-                            alt={image.altText || product.node.title}
-                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                            loading="lazy"
-                          />
-                        ) : (
-                          <div className="w-full h-full flex items-center justify-center">
-                            <ShoppingBag className="h-12 w-12 text-muted-foreground" />
-                          </div>
-                        )}
-                      </div>
-                      <div className="p-4 text-center">
-                        <h3 className="font-serif text-lg text-foreground group-hover:text-accent transition-colors mb-2">{product.node.title}</h3>
-                        <p className="font-sans text-base font-semibold text-foreground">
-                          {price.currencyCode} {parseFloat(price.amount).toFixed(2)}
-                        </p>
-                      </div>
-                    </Link>
-                  </article>
-                );
-              })}
-            </div>
-          )}
         </div>
       </section>
       <Footer />

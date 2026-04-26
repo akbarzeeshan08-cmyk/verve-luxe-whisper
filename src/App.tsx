@@ -15,30 +15,8 @@ import Terms from "./pages/Terms";
 import ShippingReturns from "./pages/ShippingReturns";
 import TermsConditions from "./pages/TermsConditions";
 import NotFound from "./pages/NotFound";
-import { useCartSync } from "@/hooks/useCartSync";
 
 const queryClient = new QueryClient();
-
-const AppContent = () => {
-  useCartSync();
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Index />} />
-        <Route path="/our-story" element={<OurStory />} />
-        <Route path="/shop" element={<Shop />} />
-        <Route path="/product/:handle" element={<ProductDetail />} />
-        <Route path="/collections/:category" element={<CategoryPage />} />
-        <Route path="/privacy" element={<Privacy />} />
-        <Route path="/terms" element={<Terms />} />
-        <Route path="/shipping-returns" element={<ShippingReturns />} />
-        <Route path="/terms-conditions" element={<TermsConditions />} />
-        {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </BrowserRouter>
-  );
-};
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -46,7 +24,21 @@ const App = () => (
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        <AppContent />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/our-story" element={<OurStory />} />
+            <Route path="/shop" element={<Shop />} />
+            <Route path="/product/:handle" element={<ProductDetail />} />
+            <Route path="/collections/:category" element={<CategoryPage />} />
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/terms" element={<Terms />} />
+            <Route path="/shipping-returns" element={<ShippingReturns />} />
+            <Route path="/terms-conditions" element={<TermsConditions />} />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
       </TooltipProvider>
     </HelmetProvider>
   </QueryClientProvider>

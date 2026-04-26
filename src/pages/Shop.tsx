@@ -1,16 +1,27 @@
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
-import { ShoppingBag } from "lucide-react";
+import {
+  Breadcrumb,
+  BreadcrumbList,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
+import { Loader2 } from "lucide-react";
 import { SEO } from "@/components/SEO";
+import { useShopifyProducts } from "@/hooks/useShopifyProducts";
+import ProductCard from "@/components/ProductCard";
 
 const Shop = () => {
+  const { data: products, isLoading } = useShopifyProducts();
+
   return (
     <main className="min-h-screen bg-background">
       <SEO
-        title="Shop — Verve"
-        description="The Verve collection of handcrafted leather pet accessories is coming soon."
+        title="Shop All — Verve"
+        description="Browse the full Verve collection of handcrafted luxury leather pet accessories."
         canonicalPath="/shop"
       />
       <Navbar />
@@ -29,15 +40,27 @@ const Shop = () => {
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
-          <div className="text-center py-20">
-            <ShoppingBag className="h-16 w-16 text-muted-foreground mx-auto mb-6" />
-            <p className="text-sm font-sans tracking-[0.3em] uppercase text-accent mb-4">Shop</p>
-            <h1 className="font-serif text-4xl md:text-5xl text-foreground mb-4">Coming Soon</h1>
-            <div className="w-12 h-px bg-accent mx-auto mb-6" />
-            <p className="text-muted-foreground max-w-md mx-auto">
-              We're curating our collection. Check back soon for premium leather goods crafted for your companion.
-            </p>
+          <div className="text-center mb-16">
+            <p className="text-sm font-sans tracking-[0.3em] uppercase text-accent mb-4">Collection</p>
+            <h1 className="font-serif text-4xl md:text-5xl text-foreground mb-4">Shop All</h1>
+            <div className="w-12 h-px bg-accent mx-auto" />
           </div>
+
+          {isLoading ? (
+            <div className="flex justify-center py-20">
+              <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
+            </div>
+          ) : !products || products.length === 0 ? (
+            <div className="text-center py-20">
+              <p className="text-muted-foreground">No products found.</p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
+              {products.map((p) => (
+                <ProductCard key={p.node.id} product={p} />
+              ))}
+            </div>
+          )}
         </div>
       </section>
       <Footer />

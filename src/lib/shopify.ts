@@ -1,9 +1,9 @@
 import { toast } from "sonner";
 
 const SHOPIFY_API_VERSION = '2025-07';
-const SHOPIFY_STORE_PERMANENT_DOMAIN = '1aehsn-ph.myshopify.com';
+const SHOPIFY_STORE_PERMANENT_DOMAIN = 'verve-luxe-whisper-14rrw.myshopify.com';
 const SHOPIFY_STOREFRONT_URL = `https://${SHOPIFY_STORE_PERMANENT_DOMAIN}/api/${SHOPIFY_API_VERSION}/graphql.json`;
-const SHOPIFY_STOREFRONT_TOKEN = '43e14fffa879728f5005f38267d04c34';
+const SHOPIFY_STOREFRONT_TOKEN = 'aa09c3e2420b8547690c1159f5d49d40';
 
 export interface ShopifyProduct {
   node: {

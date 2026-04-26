@@ -1,7 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import FeaturedCollections from "@/components/FeaturedCollections";
-import ProductCarousel from "@/components/ProductCarousel";
 import Footer from "@/components/Footer";
 import NgoSupport from "@/components/NgoSupport";
 import { SEO } from "@/components/SEO";
@@ -26,7 +25,6 @@ const Index = () => {
       <Navbar />
       <Hero />
       <FeaturedCollections />
-      <ProductCarousel />
       <NgoSupport />
       <Footer />
     </main>

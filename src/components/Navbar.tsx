@@ -1,7 +1,12 @@
 import { useState, useEffect, useRef } from "react";
+import { Search, User } from "lucide-react";
+import CartDrawer from "@/components/CartDrawer";
+import SearchOverlay from "@/components/SearchOverlay";
+import { SHOPIFY_LOGIN_URL } from "@/lib/shopify";
 
 const Navbar = () => {
   const [visible, setVisible] = useState(true);
+  const [searchOpen, setSearchOpen] = useState(false);
   const lastScrollY = useRef(0);
 
   useEffect(() => {
@@ -15,17 +20,40 @@ const Navbar = () => {
   }, []);
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md border-b border-border transition-transform duration-300 ${
-        visible ? "translate-y-0" : "-translate-y-full"
-      }`}
-    >
-      <nav className="container mx-auto flex items-center justify-center px-6 py-4 lg:px-12">
-        <a href="/" className="font-serif text-2xl lg:text-3xl tracking-wider text-foreground">
-          VERVE
-        </a>
-      </nav>
-    </header>
+    <>
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md border-b border-border transition-transform duration-300 ${
+          visible ? "translate-y-0" : "-translate-y-full"
+        }`}
+      >
+        <nav className="container mx-auto flex items-center justify-between px-6 py-4 lg:px-12">
+          <div className="flex-1" />
+          <a href="/" className="font-serif text-2xl lg:text-3xl tracking-wider text-foreground">
+            VERVE
+          </a>
+          <div className="flex-1 flex items-center justify-end gap-5">
+            <button
+              aria-label="Search"
+              onClick={() => setSearchOpen(true)}
+              className="text-foreground hover:text-accent transition-colors"
+            >
+              <Search className="h-5 w-5" />
+            </button>
+            <a
+              href={SHOPIFY_LOGIN_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Account"
+              className="text-foreground hover:text-accent transition-colors"
+            >
+              <User className="h-5 w-5" />
+            </a>
+            <CartDrawer />
+          </div>
+        </nav>
+      </header>
+      <SearchOverlay open={searchOpen} onClose={() => setSearchOpen(false)} />
+    </>
   );
 };
 

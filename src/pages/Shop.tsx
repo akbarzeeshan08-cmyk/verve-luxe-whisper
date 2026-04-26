@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { ShopifyProduct, storefrontApiRequest, STOREFRONT_PRODUCTS_QUERY } from "@/lib/shopify";
 import { Loader2, ShoppingBag } from "lucide-react";
+import { SEO } from "@/components/SEO";
 
 const Shop = () => {
   const [products, setProducts] = useState<ShopifyProduct[]>([]);
@@ -27,6 +28,11 @@ const Shop = () => {
 
   return (
     <main className="min-h-screen bg-background">
+      <SEO
+        title="Shop All — Luxury Leather Pet Accessories | Verve"
+        description="Browse the full Verve collection of handcrafted leather collars, leashes and dog coats designed for the modern dog owner."
+        canonicalPath="/shop"
+      />
       <Navbar />
       <section className="pt-32 pb-24 px-6 lg:px-12">
         <div className="container mx-auto">

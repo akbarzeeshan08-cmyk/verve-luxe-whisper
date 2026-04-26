@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { ShopifyProduct, storefrontApiRequest, STOREFRONT_PRODUCTS_QUERY } from "@/lib/shopify";
 import { Loader2, ShoppingBag } from "lucide-react";
+import { SEO } from "@/components/SEO";
 
 const CATEGORY_META: Record<string, { title: string; subtitle: string; description: string; query: string }> = {
   collars: {
@@ -68,6 +69,17 @@ const CategoryPage = () => {
 
   return (
     <main className="min-h-screen bg-background">
+      <SEO
+        title={`${meta.title} — ${meta.subtitle} | Verve`}
+        description={meta.description}
+        canonicalPath={`/collections/${category}`}
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          name: `${meta.title} — Verve`,
+          description: meta.description,
+        }}
+      />
       <Navbar />
       <section className="pt-32 pb-24 px-6 lg:px-12">
         <div className="container mx-auto">

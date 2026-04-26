@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { useCartStore } from "@/stores/cartStore";
 import { toast } from "sonner";
 import sizeChartImage from "@/assets/dog_size_chart.png";
+import { SEO } from "@/components/SEO";
 
 const ProductDetail = () => {
   const { handle } = useParams<{ handle: string }>();
@@ -91,9 +92,39 @@ const ProductDetail = () => {
   const images = product.node.images.edges;
   const variants = product.node.variants.edges;
   const selectedVariant = variants[selectedVariantIdx]?.node;
+  const primaryImage = images[0]?.node.url;
+  const minPrice = product.node.priceRange.minVariantPrice;
+  const metaDescription =
+    (product.node.description || `Shop ${product.node.title} from Verve — handcrafted luxury leather pet accessories.`)
+      .replace(/\s+/g, " ")
+      .trim()
+      .slice(0, 158);
 
   return (
     <main className="min-h-screen bg-background">
+      <SEO
+        title={`${product.node.title} — Verve`}
+        description={metaDescription}
+        image={primaryImage}
+        type="product"
+        canonicalPath={`/product/${product.node.handle}`}
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "Product",
+          name: product.node.title,
+          description: product.node.description,
+          image: images.map((i) => i.node.url),
+          offers: {
+            "@type": "Offer",
+            priceCurrency: minPrice.currencyCode,
+            price: parseFloat(minPrice.amount).toFixed(2),
+            availability: selectedVariant?.availableForSale
+              ? "https://schema.org/InStock"
+              : "https://schema.org/OutOfStock",
+            url: `https://verve-luxe-whisper.lovable.app/product/${product.node.handle}`,
+          },
+        }}
+      />
       <Navbar />
       <section className="pt-32 pb-24 px-6 lg:px-12">
         <div className="container mx-auto">

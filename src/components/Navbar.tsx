@@ -8,7 +8,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
-const SHOPIFY_STORE_DOMAIN = "verve-luxe-whisper-14rrw.myshopify.com";
+const SHOPIFY_STORE_DOMAIN = "verve-luxe-whisper-0w3sy.myshopify.com";
 
 const Navbar = () => {
   const [visible, setVisible] = useState(true);

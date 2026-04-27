@@ -11,34 +11,34 @@ import {
 } from "@/components/ui/breadcrumb";
 import { Loader2 } from "lucide-react";
 import { SEO } from "@/components/SEO";
-import { useShopifyProducts } from "@/hooks/useShopifyProducts";
+import { useProducts } from "@/hooks/useProducts";
 import ProductCard from "@/components/ProductCard";
 
-const CATEGORY_META: Record<string, { title: string; subtitle: string; description: string; query: string }> = {
+const CATEGORY_META: Record<string, { title: string; subtitle: string; description: string; type: string }> = {
   collars: {
     title: "Collars",
     subtitle: "Premium Leather",
     description: "Hand-stitched from the finest full-grain leather with solid brass hardware.",
-    query: "title:collar* OR product_type:Collars OR tag:collar",
+    type: "Collars",
   },
   leashes: {
     title: "Leashes",
     subtitle: "Braided Leather",
     description: "Durable, elegant leashes designed for comfort and lasting beauty.",
-    query: "title:leash* OR product_type:Leashes OR tag:leash",
+    type: "Leashes",
   },
   "dog-coats": {
     title: "Dog Coats",
     subtitle: "Tailored Outerwear",
     description: "Stylish, weather-ready coats with leather trim and artisan details.",
-    query: "title:coat* OR product_type:Coats OR tag:coat",
+    type: "Coats",
   },
 };
 
 const CategoryPage = () => {
   const { category } = useParams<{ category: string }>();
   const meta = category ? CATEGORY_META[category] : undefined;
-  const { data: products, isLoading } = useShopifyProducts(meta?.query);
+  const { data: products, isLoading } = useProducts({ type: meta?.type });
 
   if (!meta) {
     return (

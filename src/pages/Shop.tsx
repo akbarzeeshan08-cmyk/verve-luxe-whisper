@@ -11,11 +11,11 @@ import {
 } from "@/components/ui/breadcrumb";
 import { Loader2 } from "lucide-react";
 import { SEO } from "@/components/SEO";
-import { useShopifyProducts } from "@/hooks/useShopifyProducts";
+import { useProducts } from "@/hooks/useProducts";
 import ProductCard from "@/components/ProductCard";
 
 const Shop = () => {
-  const { data: products, isLoading } = useShopifyProducts();
+  const { data: products, isLoading } = useProducts();
 
   return (
     <main className="min-h-screen bg-background">

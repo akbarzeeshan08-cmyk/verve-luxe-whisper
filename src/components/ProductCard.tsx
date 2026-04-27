@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 import { Loader2 } from "lucide-react";
-import { ShopifyProduct } from "@/lib/shopify";
+import { Product } from "@/lib/products";
 import { useCartStore } from "@/stores/cartStore";
 import { toast } from "sonner";
 
 interface Props {
-  product: ShopifyProduct;
+  product: Product;
 }
 
 const ProductCard = ({ product }: Props) => {

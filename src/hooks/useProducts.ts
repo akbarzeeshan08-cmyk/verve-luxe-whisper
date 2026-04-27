@@ -7,6 +7,10 @@ export function useProducts(filter?: { type?: string }) {
 }
 
 export function useProduct(handle: string | undefined) {
-  const data = useMemo(() => (handle ? getProductByHandle(handle) : null), [handle]);
+  const data = useMemo(() => {
+    if (!handle) return null;
+    const p = getProductByHandle(handle);
+    return p ? p.node : null;
+  }, [handle]);
   return { data, isLoading: false };
 }

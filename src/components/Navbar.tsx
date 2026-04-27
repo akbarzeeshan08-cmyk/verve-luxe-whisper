@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import { Search, User } from "lucide-react";
 import CartDrawer from "@/components/CartDrawer";
 import SearchOverlay from "@/components/SearchOverlay";
-import { SHOPIFY_LOGIN_URL } from "@/lib/shopify";
 
 const Navbar = () => {
   const [visible, setVisible] = useState(true);
@@ -39,15 +39,13 @@ const Navbar = () => {
             >
               <Search className="h-5 w-5" />
             </button>
-            <a
-              href={SHOPIFY_LOGIN_URL}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              to="/account"
               aria-label="Account"
               className="text-foreground hover:text-accent transition-colors"
             >
               <User className="h-5 w-5" />
-            </a>
+            </Link>
             <CartDrawer />
           </div>
         </nav>

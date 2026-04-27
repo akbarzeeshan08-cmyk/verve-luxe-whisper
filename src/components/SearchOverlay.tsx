@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { Search, X, Loader2 } from "lucide-react";
-import { useShopifyProducts } from "@/hooks/useShopifyProducts";
+import { useProducts } from "@/hooks/useProducts";
 
 interface Props {
   open: boolean;
@@ -10,7 +10,7 @@ interface Props {
 
 const SearchOverlay = ({ open, onClose }: Props) => {
   const [query, setQuery] = useState("");
-  const { data: products, isLoading } = useShopifyProducts(undefined, 50);
+  const { data: products, isLoading } = useProducts();
 
   useEffect(() => {
     if (!open) setQuery("");

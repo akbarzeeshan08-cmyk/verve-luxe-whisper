@@ -4,7 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Loader2 } from "lucide-react";
 import { SEO } from "@/components/SEO";
-import { useShopifyProduct } from "@/hooks/useShopifyProducts";
+import { useProduct } from "@/hooks/useProducts";
 import { useCartStore } from "@/stores/cartStore";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
@@ -19,7 +19,7 @@ import {
 
 const ProductDetail = () => {
   const { handle } = useParams<{ handle: string }>();
-  const { data: product, isLoading } = useShopifyProduct(handle);
+  const { data: product, isLoading } = useProduct(handle);
   const [variantIdx, setVariantIdx] = useState(0);
   const [imgIdx, setImgIdx] = useState(0);
   const addItem = useCartStore((s) => s.addItem);

@@ -11,6 +11,7 @@ import Shop from "./pages/Shop";
 import ProductDetail from "./pages/ProductDetail";
 import ProductListing from "./pages/ProductListing";
 import CategoryPage from "./pages/CategoryPage";
+import Account from "./pages/Account";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import ShippingReturns from "./pages/ShippingReturns";
@@ -28,6 +29,7 @@ const AppRoutes = () => {
       <Route path="/product" element={<ProductListing />} />
       <Route path="/product/:handle" element={<ProductDetail />} />
       <Route path="/collections/:category" element={<CategoryPage />} />
+      <Route path="/account" element={<Account />} />
       <Route path="/privacy" element={<Privacy />} />
       <Route path="/terms" element={<Terms />} />
       <Route path="/shipping-returns" element={<ShippingReturns />} />

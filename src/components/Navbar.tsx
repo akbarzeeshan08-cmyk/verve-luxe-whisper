@@ -1,13 +1,18 @@
 import { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Search, User } from "lucide-react";
 import CartDrawer from "@/components/CartDrawer";
 import SearchOverlay from "@/components/SearchOverlay";
+import AuthDialog from "@/components/AuthDialog";
+import { useAuthStore } from "@/stores/authStore";
 
 const Navbar = () => {
   const [visible, setVisible] = useState(true);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [authOpen, setAuthOpen] = useState(false);
   const lastScrollY = useRef(0);
+  const navigate = useNavigate();
+  const token = useAuthStore((s) => s.token);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -39,18 +44,20 @@ const Navbar = () => {
             >
               <Search className="h-5 w-5" />
             </button>
-            <Link
-              to="/account"
-              aria-label="Account"
+            <button
+              type="button"
+              aria-label={token ? "Account" : "Sign in"}
+              onClick={() => (token ? navigate("/account") : setAuthOpen(true))}
               className="text-foreground hover:text-accent transition-colors"
             >
               <User className="h-5 w-5" />
-            </Link>
+            </button>
             <CartDrawer />
           </div>
         </nav>
       </header>
       <SearchOverlay open={searchOpen} onClose={() => setSearchOpen(false)} />
+      <AuthDialog open={authOpen} onOpenChange={setAuthOpen} />
     </>
   );
 };
